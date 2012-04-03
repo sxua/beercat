@@ -1,6 +1,8 @@
 BeerCat
 =======
 
+[![Dependency Status](https://gemnasium.com/sxua/beercat.png)](https://gemnasium.com/sxua/beercat)
+
 - Sinatra as framework
 - Google Spreadsheets as storage:  
 ![Google Spreadsheets](http://pix.am/GENH.png "Google Spreadsheets")
