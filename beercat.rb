@@ -1,9 +1,7 @@
 class Beercat < Sinatra::Base
   before do
-    require 'yaml'
     require 'google_spreadsheet'
-    @google = YAML.load_file("google.yml")
-    @session = GoogleSpreadsheet.login(@google['auth']['email'], @google['auth']['password'])
+    @session = GoogleSpreadsheet.login(ENV['G_MAIL'], ENV['G_PASSWORD'])
   end
 
   helpers do
@@ -21,7 +19,7 @@ class Beercat < Sinatra::Base
   end
 
   get '/' do
-    @table = @session.spreadsheet_by_key(@google['doc']['key']).worksheets.first
+    @table = @session.spreadsheet_by_key(ENV['G_KEY']).worksheets.first
     @countries, @breweries = get_countries, get_breweries
     erb :index, :layout => :application
   end
