@@ -6,7 +6,7 @@ class Beercat < Sinatra::Base
 
   helpers do
     def sort_by_count number
-      @table.rows.slice(1..-1).map {|row| row[number]}.group_by {|c| c}.map {|k, v| {:name => k, :count => v.count}}.sort {|a, b| b[:count] <=> a[:count]}
+      @table.rows.slice(1..-1).map {|row| row[number]}.group_by {|c| c}.map {|k, v| {name: k, count: v.count}}.sort {|a, b| b[:count] <=> a[:count]}
     end
     
     def get_countries
@@ -21,6 +21,6 @@ class Beercat < Sinatra::Base
   get '/' do
     @table = @session.spreadsheet_by_key(ENV['G_KEY']).worksheets.first
     @countries, @breweries = get_countries, get_breweries
-    erb :index, :layout => :application
+    erb :index, layout: :application
   end
 end
